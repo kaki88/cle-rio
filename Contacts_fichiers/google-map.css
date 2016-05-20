@@ -1,0 +1,28 @@
+@import url(../css/font-awesome.css);
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700);
+/*==================  GOOGLE MAP  ======================*/
+.map {
+  position: relative;
+  padding-bottom: 80%;
+  margin-top: 45px;
+}
+@media (min-width: 992px) {
+  .map {
+    margin-top: 7.77777778rem;
+  }
+}
+.map .gm-style .gm-style-iw {
+  font-size: 0.72222222rem;
+  line-height: 1.2;
+}
+.map_model {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.map_model img {
+  max-width: none !important;
+}
+.map_locations {
+  display: none;
+}

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commander</title>
+    <link rel="stylesheet" href="styles.css">
+     <link rel="stylesheet" href="rangeSlider.css">
+    <link href="./Home_files/bootstrap.css" rel="stylesheet">
+    <script src="js/rangeSlider.js"></script>
+        <style>
+    nav > ul > li:nth-child(2) > a,
+nav > ul > li:hover > a,
+nav > ul > li > a:hover {
+    color: #fff;
+}
+nav > ul > li:nth-child(2) > a:after,
+nav > ul > li:hover > a:after,
+nav > ul > li > a:hover:after {
+    background: #f64d00;
+}
+    </style>
+<link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
+    <!--========================================================
+                              HEADER
+    =========================================================-->
+    <body onload="ajoutpanier();">
+        
+        
+   
+       <div id="header">
+			<div class="wrap group">
+				<div class="head-wrap group">
+					<img id="logo" class="log" alt="logo" src="img/logo.png">
+					<nav>
+						
+						<ul>
+						<li><a  rel="" href="index.html" >Accueil</a></li>
+							<li><a  class="test" href="commander.html" class="active">Commander</a></li>
+                            <li><a  href="Contacts.php">Contact</a></li>
+						</ul>
+					</nav>
+				</div> <!-- .head-wrap -->
+				<div class="lang-selector"><a id="langswitch" href="#" data-lang="en">FR</a></div>
+			</div> <!-- .wrap < header -->
+		</div>
+  
+    <!--========================================================
+                              CONTENT
+    =========================================================-->
+    <main>
+        <!-- PANIER -->
+        <div class='liveExample'>
+             <div class='coller'>
+            <section class="">
+                <article class="">
+                    <legend>Quantités et options disponible</legend>
+                    <label class="">Quantité</label> :
+                    <input oninput="ajoutpanier();updateTextInput(this.value);" type="range" id="qte" min="500" max="10000" style="width:320px" value="500" step="500" data-rangeSlider/>
+                    <input type="hidden" id="textInput" value="500">
+                    <br>
+                    <br>
+                    
+<div class="output">
+
+
+    <output></output>
+</div>
+        
+                              
+                    
+                    
+                    
+                    <label class="">Anneau</label> :
+                    <select id="anneau" name="select" onchange="ajoutpanier();">
+                        <option  value="avec">avec (+ 0,15 €)</option>
+                        <option selected="selected" value="sans">sans</option>
+                    </select>
+                    <br>
+                    <br>
+                    <label class="">Méthode de marquage :</label>
+                    <select id="marquage" name="select" onchange="ajoutpanier();">
+                        <option value="gr">gravure laser</option>
+                        <option value="s1">sérigraphie 1 couleur</option>
+                        <option value="s2">sérigraphie 2 couleurs</option>
+                    </select>
+                    <br>
+                    <br>
+                  
+                </article>
+            </section></div>
+                  <div class='collerd'>
+            <section class="">
+                <article class="">
+                    <legend>Votre panier</legend>
+                    <div class='pan'>
+                    <div id="ssprix"></div>
+                    <div id="prix"></div>
+                    <div id="fdp"></div>
+                    <div id="totalf"></div>
+                 </div>
+                    
+                    
+                    
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="clerio@simplon.com">
+<input type="hidden" name="item_name" value="Clef Rio">
+<input type="hidden" name="currency_code" value="EUR">
+<input type="hidden" id="paypal" name="amount" value="">
+<input type="image" class="pp" src="img/paypal.png" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+</form>
+                </article>
+            </section></div>
+        </div>
+    </main>
+
+    <!--========================================================
+                            FOOTER
+    =========================================================-->
+      <footer>
+    <section>
+      <div class="container container-wide center-sm">
+        <div class="row">
+          <div class="col-md-5 ">
+            <p class="rights">
+              © <span id="copyright-year">2016</span> Clerio, TOUS LES DROITS RESERVES.
+            </p>
+          </div>
+          <div class="col-md-2 text-center ">
+            <a href="#" class="brand-name"> Clerio</a>
+          </div>
+          <div class="col-md-offset-2 col-md-3 ">
+            <ul class="inline-list">
+              <li><a href="#" class="icon icon-md icon-default fa-facebook"></a></li>
+              <li><a href="#" class="icon icon-md icon-default  fa-pinterest-p"></a></li>
+              <li><a href="#" class="icon icon-md icon-default fa-twitter"></a></li>
+              <li><a href="#" class="icon icon-md icon-default fa-google-plus"></a></li>
+              <li><a href="#" class="icon icon-md icon-default fa-instagram"></a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </footer>
+
+    <script type="text/javascript">
+        function updateTextInput(val) {
+            document.getElementById('textInput').value = val;
+        }
+        function showValue(newValue) {
+            document.getElementById("range").innerHTML = newValue;
+        }
+        var qte = document.getElementById("qte");
+        function ajoutpanier() {
+            var quantite = qte.value;
+            var prixdebase = quantite * calc();
+            var ssprixdebase = 1 * calc();
+            var prixavecanneau = prixdebase + (quantite * 0.15);
+            var ssprixavecanneau = ssprixdebase + 0.15;
+            var prixsg1 = quantite * calcsg1();
+            var ssprixsg1 = 1 * calcsg1();
+            var prixsg1aveca = prixsg1 + (quantite * 0.15);
+            var ssprixsg1aveca = ssprixsg1 + 0.15;
+            var prixsg2 = quantite * calcsg2();
+            var ssprixsg2 = 1 * calcsg2();
+            var prixsg2aveca = prixsg2 + (quantite * 0.15);
+            var ssprixsg2aveca = ssprixsg2 + 0.15;
+            var fraisdeport = (((quantite - 500) / 500) * 2) + 5.90;
+            function calc() {
+                var a = (1.80 - 1.09) / 19;
+                var b = quantite / 500 - 1;
+                b = a * b;
+                b = 1.80 - b;
+                c = b.toFixed(2);
+                return c;
+            }
+            function calcsg1() {
+                var a = (2.10 - 1.35) / 19;
+                var b = quantite / 500 - 1;
+                b = a * b;
+                b = 2.10 - b;
+                c = b.toFixed(2);
+                return c;
+            }
+            function calcsg2() {
+                var a = (2.29 - 1.42) / 19;
+                var b = quantite / 500 - 1;
+                b = a * b;
+                b = 2.29 - b;
+                c = b.toFixed(2);
+                return c;
+            }
+            if (document.getElementById('marquage').value == 'gr') {
+                if (document.getElementById('anneau').value == 'avec')
+                    var prix = prixavecanneau;
+                else if (document.getElementById('anneau').value == 'sans')
+                    var prix = prixdebase;
+            }
+            if (document.getElementById('marquage').value == 's1') {
+                if (document.getElementById('anneau').value == 'avec')
+                    var prix = prixsg1aveca;
+                else if (document.getElementById('anneau').value == 'sans')
+                   var prix = prixsg1 ;
+            }
+            if (document.getElementById('marquage').value == 's2') {
+                if (document.getElementById('anneau').value == 'avec')
+                    var prix = prixsg2aveca ;
+                else if (document.getElementById('anneau').value == 'sans')
+                    var prix = prixsg2 ;
+            }
+                        if (document.getElementById('marquage').value == 'gr') {
+                if (document.getElementById('anneau').value == 'avec')
+                    var ssprix = ssprixavecanneau;
+                else if (document.getElementById('anneau').value == 'sans')
+                    var ssprix = ssprixdebase;
+            }
+            if (document.getElementById('marquage').value == 's1') {
+                if (document.getElementById('anneau').value == 'avec')
+                    var ssprix = ssprixsg1aveca;
+                else if (document.getElementById('anneau').value == 'sans')
+                   var ssprix = ssprixsg1 ;
+            }
+            if (document.getElementById('marquage').value == 's2') {
+                if (document.getElementById('anneau').value == 'avec')
+                    var ssprix = ssprixsg2aveca ;
+                else if (document.getElementById('anneau').value == 'sans')
+                    var ssprix = ssprixsg2 ;
+            }
+            document.getElementById("ssprix").innerHTML = "Prix unitaire :  <span class='pu'>" + ssprix.toFixed(2) + " €</span>";
+            document.getElementById("prix").innerHTML = "Sous-total :  " + prix.toFixed(2) + " €";
+            document.getElementById("fdp").innerHTML = "Frais de port :  " + fraisdeport.toFixed(2) + " €";
+            var gtotal = prix+fraisdeport;
+            document.getElementById("totalf").innerHTML = "<span class='to'>Montant total:  " + gtotal.toFixed(2) + " €</span>";
+            
+            document.getElementById('paypal').value= gtotal.toFixed(2);
+        }
+    </script>
+        
+<script>
+    (function () {
+
+        var selector = '[data-rangeSlider]',
+                elements = document.querySelectorAll(selector);
+
+  // Example functionality to demonstrate a value feedback
+        function valueOutput(element) {
+            var value = element.value,
+                    output = element.parentNode.getElementsByTagName('output')[0];
+            output.innerHTML = + value +' pièces';
+        }
+
+        for (var i = elements.length - 1; i >= 0; i--) {
+            valueOutput(elements[i]);
+        }
+
+        Array.prototype.slice.call(document.querySelectorAll('input[type="range"]')).forEach(function (el) {
+            el.addEventListener('input', function (e) {
+                valueOutput(e.target);
+            }, false);
+        });
+
+        // Basic rangeSlider initialization
+        rangeSlider.create(elements, {
+
+            // Callback function
+            onInit: function () {
+            },
+
+            // Callback function
+            onSlideStart: function (value, percent, position) {
+                console.info('onSlideStart', 'value: ' + value, 'percent: ' + percent, 'position: ' + position);
+            },
+
+            // Callback function
+            onSlide: function (value, percent, position) {
+                console.log('onSlide', 'value: ' + value, 'percent: ' + percent, 'position: ' + position);
+            },
+
+            // Callback function
+            onSlideEnd: function (value, percent, position) {
+                console.warn('onSlideEnd', 'value: ' + value, 'percent: ' + percent, 'position: ' + position);
+            }
+        });
+
+    })();
+</script>
+    </body>
+</html>
